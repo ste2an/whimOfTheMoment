@@ -3,24 +3,20 @@ package simulationOfChatbox;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SenderFormat {
-
+public class ReceiverFormat {
     public static void main(String[] args) {
-        String[] s = {"Hey","there", "you", "are", "so", "beautiful", "today" };
-
-        SenderFormat senderFormat = new SenderFormat();
-        List<String> li = senderFormat.SenderFormat(s, 5, 15);
-
-        for(int i = 0; i < li.size(); i ++){
-            System.out.println(li.get(i) + "|" );
-
+        String[] receive = {"Hey","how", "are", "you", "today"};
+        ReceiverFormat receiverFormat = new ReceiverFormat();
+        List<String> receiverPart = receiverFormat.receiverFormat(receive,5,15);
+        for(String s : receiverPart){
+            System.out.println("|" + s );
         }
-
     }
 
     private int maxWidth;
     private int userWidth;
-    public List<String> SenderFormat(String[] messages, int userWidth, int maxWidth){
+
+    public List<String> receiverFormat(String[] messages, int userWidth, int maxWidth){
         this.maxWidth = maxWidth;
         this.userWidth = userWidth;
 
@@ -33,7 +29,7 @@ public class SenderFormat {
                 String[] oneLineBreak = oneWordLine(messages[left]);
 
                 for(int i = 0; i < oneLineBreak.length - 1; i ++){
-                    list.add(addTailSpace(oneLineBreak[i]));
+                    list.add(addHeadSpace(oneLineBreak[i]));
                 }
                 int LastLineTaken = oneLineBreak[oneLineBreak.length - 1].length();
                 // 最后一行占据的长度
@@ -52,11 +48,11 @@ public class SenderFormat {
                         sb.append(messages[i]);
                         sb.append( i == left_ ? "" : " ");
                     }
-                    list.add(addTailSpace(sb.toString()));
+                    list.add(addHeadSpace(sb.toString()));
                     System.out.println("left_ :" + left_);
                     left = left_ + 1;
                 }else{
-                    list.add(addTailSpace(oneLineBreak[oneLineBreak.length - 1]));
+                    list.add(addHeadSpace(oneLineBreak[oneLineBreak.length - 1]));
                     left = left + 1;
                 }
 
@@ -71,7 +67,7 @@ public class SenderFormat {
                 }
                 curWordLen += messages[right].length();
                 sb.append(messages[right]);
-                list.add(addTailSpace(sb.toString()));
+                list.add(addHeadSpace(sb.toString()));
 
                 left = right + 1;
             }
@@ -118,12 +114,11 @@ public class SenderFormat {
         }
     }
 
-    public String addTailSpace(String str){
+    public String addHeadSpace(String str){
         int spaceLen = maxWidth - str.length();
         StringBuilder sb = new StringBuilder(str);
-
         for(int i = 0; i < spaceLen; i ++){
-            sb.append(" ");
+            sb.insert(0, " ");
         }
         return sb.toString();
     }

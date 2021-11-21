@@ -8,7 +8,7 @@ public class Test {
     public static void main(String[] args) {
         String[][] texts = {{"1", "hey how are you now"}, {"2", "Hi I am good you look great today"},{"1", "Thank you so much and have a good day"} };
         Test t = new Test();
-        List<String> res = t.mimicChatBox(texts, 7, 25);
+        List<String> res = t.mimicChatBox(texts, 10, 25);
         for(String s : res){
             System.out.println(s);
         }

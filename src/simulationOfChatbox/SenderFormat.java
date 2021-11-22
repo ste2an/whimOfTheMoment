@@ -30,6 +30,7 @@ public class SenderFormat {
         while(left < messages.length){
             int right = getRight(left, messages);
             if(left == right){
+                // 如果一个单词的长度已经大于user width
                 String[] oneLineBreak = oneWordLine(messages[left]);
 
                 for(int i = 0; i < oneLineBreak.length - 1; i ++){
@@ -40,7 +41,7 @@ public class SenderFormat {
 
                 int left_ = left + 1;
                 if(left_ < messages.length && (LastLineTaken + 1 + messages[left_].length() <= userWidth) ){
-
+                // 如果最后一行剩余长度还可以放下额外的单词
                     while((left_ < messages.length) && (LastLineTaken + 1 + messages[left_].length() <= userWidth)){
                         left_ ++;
                         LastLineTaken += (messages[left_].length() + 1);
@@ -80,6 +81,7 @@ public class SenderFormat {
     }
 
     public int getRight(int left, String[] str){
+        // 计算最多一行可以放多少个单词
         int curLen = str[left].length();
         int right = left + 1;
         while(right < str.length && (curLen + 1 + str[right].length()) <= userWidth ){
@@ -90,6 +92,7 @@ public class SenderFormat {
     }
 
     public String[] oneWordLine(String str){
+        //一个单词的长度已经大于user width
         int isLen = str.length() % userWidth;
         int len = str.length() / userWidth;
         if(isLen == 0){
